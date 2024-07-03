@@ -2,7 +2,7 @@
 theme = "kita"
 
 # The URL the site will be built for
-base_url = "https://example.com"
+base_url = "EvelynSchwab.github.io"
 
 title = "Evelyn Schwab"
 description = "Evelyn Schwab's personal pages site."
