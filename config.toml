@@ -80,7 +80,7 @@ social_image = "profile/profile.png"
 name = "Evelyn Schwab"
 bio = "Programmer and technical artist specialised in Unreal Engine."
 # The URL of avatar.
-avatar_url = "profile/profile.png"
+avatar_url = "profile/profile.svg"
 
 # Invert color in dark mode.
 avatar_invert = false

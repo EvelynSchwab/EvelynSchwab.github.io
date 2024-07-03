@@ -1,18 +1,18 @@
 [[project]]
-name = "lorem"
-desc = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, nisi saepe dolor unde iusto dolore nam, vero optio consequuntur repudiandae et! Atque libero expedita laudantium cupiditate, sit explicabo sequi ipsa!"
-tags = ["nisi", "saepe"]
+name = "Dreamslayer"
+desc = "DreamSlayer is the game project from the second year of our innovative game development pedagogy. It was successfully released on Steam in Feb 2024 and has received over 40,000 library additions and over 2000 unique players, as well as great feedback with 92% of reviews being positive."
+tags = ["Game Project", "Unreal Engine"]
 links = [
-    { name = "github", url = "https://example.com" },
-    { name = "docs", url = "https://example.com" },
+    { name = "Dreamslayer on Steam", url = "https://store.steampowered.com/app/2670250/Dreamslayer/" },
 ]
 
 [[project]]
-name = "ipsum"
-desc = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, nisi saepe dolor unde iusto dolore nam, vero optio consequuntur repudiandae et! Atque libero expedita laudantium cupiditate, sit explicabo sequi ipsa!"
-tags = ["lorem", "ipsum"]
+name = "Unreal Engine Chaos Flesh Test Project - Meat Cube Re-creation"
+desc = "A short R&D project investigating the new experimental Chaos Flesh plugin for Unreal Engine 5.3 by re-creating the infamous Meat Cube from the 2008 GDC demo of Unreal Engine 3."
+tags = ["Unreal Engine", "Physics", "Chaos"]
 links = [
-    { name = "homepage", url = "https://example.com" },
-    { name = "source", url = "https://example.com" },
-    { name = "docs", url = "https://example.com" },
+    { name = "YouTube", url = "https://www.youtube.com/watch?v=3XSOZwfJTDc" },
+    { name = "GitHub", url = "https://github.com/EvelynSchwab/Chaos-flesh-meat-cube" },
+    { name = "Twitter", url = "https://twitter.com/evelyn_schwab/status/1724673286414770575" },
+    { name = "80lv Article", url = "https://80.lv/articles/an-artist-recreates-the-meat-cube-from-unreal-engine-3-tech-demo-in-ue5/" }
 ]
