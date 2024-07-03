@@ -1,0 +1,106 @@
+# The site theme to use.
+theme = "kita"
+
+# The URL the site will be built for
+base_url = "https://example.com"
+
+title = "Evelyn Schwab"
+description = "Evelyn Schwab's personal pages site."
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+# When set to "true", a feed is automatically generated.
+generate_feeds = true
+
+# The filenames to use for the feeds. Used as the template filenames, too.
+# Defaults to ["atom.xml"], which has a built-in template that renders an Atom 1.0 feed.
+# There is also a built-in template "rss.xml" that renders an RSS 2.0 feed.
+feed_filenames = ["atom.xml"]
+
+# The taxonomies to be rendered for the site and their configuration of the default languages
+# Example:
+#     taxonomies = [
+#       {name = "tags", feed = true}, # each tag will have its own feed
+#       {name = "tags"}, # you can have taxonomies with the same name in multiple languages
+#       {name = "categories", paginate_by = 5},  # 5 items per page for a term
+#       {name = "authors"}, # Basic definition: no feed or pagination
+#     ]
+#
+taxonomies = [{ name = "tags", rss = true, paginate_by = 5 }]
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = false
+
+[extra]
+# Put all your custom variables here
+# Enable KaTex math formula support globally.
+math = false
+# Enable mermaid support globally.
+mermaid = false
+# Enable comment support globally.
+comment = false
+
+# The URL of social image.
+social_image = "profile/profile.png"
+
+[extra.style]
+# The custom background color.
+# bg_color = ""
+
+# The custom background color in dark mode.
+# bg_dark_color = ""
+
+# Enable header blur.
+# header_blur = true
+
+# The custom header color, only available when `header_blur` is false.
+# header_color = ""
+
+# The custom header color in dark mode, only available when `header_blur` is false.
+# header_dark_color = ""
+
+# The profile on home page.
+[extra.profile]
+name = "Evelyn Schwab"
+bio = "Programmer and technical artist specialised in Unreal Engine."
+# The URL of avatar.
+avatar_url = "profile/profile.png"
+
+# Invert color in dark mode.
+avatar_invert = false
+
+# The social icons below the profile on the home page.
+[[extra.profile.social]]
+name = "github"
+url = "https://github.com/EvelynSchwab"
+
+[[extra.profile.social]]
+name = "twitter"
+url = "https://twitter.com/evelyn_schwab"
+
+[[extra.profile.social]]
+name = "linkedin"
+url = "https://twitter.com/evelyn_schwab"
+
+# The top menu.
+[[extra.menu]]
+name = "Projects"
+url = "$BASE_URL/projects"
+
+[[extra.menu]]
+name = "Blog"
+url = "$BASE_URL/archive"
+
+[[extra.menu]]
+name = "Tags"
+url = "$BASE_URL/tags"
+
+[[extra.menu]]
+name = "About"
+url = "$BASE_URL/about"
