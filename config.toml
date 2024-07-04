@@ -80,7 +80,7 @@ social_image = "profile/profile.png"
 name = "Evelyn Schwab"
 bio = "Programmer and technical artist specialised in Unreal Engine."
 # The URL of avatar.
-avatar_url = "profile/profile.svg"
+avatar_url = "profile/profile.jpg"
 
 # Invert color in dark mode.
 avatar_invert = false
@@ -98,14 +98,30 @@ url = "https://twitter.com/evelyn_schwab"
 name = "linkedin"
 url = "https://twitter.com/evelyn_schwab"
 
+[[extra.profile.social]]
+name = "youtube"
+url = "https://www.youtube.com/channel/UCBBAiRy7jWL0xMt87QYHjPg"
+
+[[extra.profile.social]]
+name = "itchdotio"
+url = "https://evelyn-schwab.itch.io/"
+
+[[extra.profile.social]]
+name = "artstation"
+url = "https://evelynschwab.artstation.com/"
+
 # The top menu.
 [[extra.menu]]
 name = "Projects"
 url = "$BASE_URL/projects"
 
 [[extra.menu]]
-name = "Blog"
-url = "$BASE_URL/archive"
+name = "Docs"
+url = "$BASE_URL/tags/documentation"
+
+#[[extra.menu]]
+#name = "archive"
+#url = "$BASE_URL/archive"
 
 [[extra.menu]]
 name = "Tags"

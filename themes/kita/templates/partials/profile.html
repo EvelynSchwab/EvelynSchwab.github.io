@@ -2,15 +2,16 @@
 <div class="mb-16 flex items-start">
   {% if config.extra.profile.avatar_url %}
   <div
-    class="mr-5 shrink-0 rounded-full border-[0.25px] border-black/10 bg-white/50 p-1 shadow dark:bg-white/[15%]"
+    class="mr-5 flex-none rounded-full border-[0.25px] border-black/10 bg-white/50 p-1 shadow dark:bg-white/[15%]"
   >
     <img
-      class="{% if config.extra.profile.avatar_invert %}dark:invert{% endif %} my-0 aspect-square w-16 rounded-full !bg-black/5"
+      class="{% if config.extra.profile.avatar_invert %}dark:invert{% endif %} my-0 aspect-square rounded-full !bg-black/5"
       src="{{ get_url(path=config.extra.profile.avatar_url) }}"
       alt="{{ config.extra.profile.name | default(value=config.title) }}"
+      style="width: 112px;" 
     />
   </div>
-  {% endif %}<!---->
+  {% endif %}
 
   {% if config.extra.profile.name %}
   <div>
@@ -25,7 +26,7 @@
       <a
         class="primary-link h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat]"
         style="--url: url({{ macros::get_social_icon(icon=social.name) }})"
-        href="{{ social.url | replace(from=`$BASE_URL`, to=config.base_url) | safe  }}"
+        href="{{ social.url | replace(from=`$BASE_URL`, to=config.base_url) | safe }}"
         target="_blank"
         rel="{% if social.name == `rss` %}alternate{% else %}me{% endif %}"
       >
