@@ -93,25 +93,29 @@ The included modifiers have built-in debug visualisers using this function, and 
 The Modular Camera Modifier parent class can be subclassed in Blueprint or C++. Overriding the below functions will allow you to set up custom location and FOV overrides. The blueprint overridable versions of these functions are prefixed with *Blueprint*.
 
 | Function Name              | Description                                                |
-| -------------------------- | ---------------------------------------------------------- |
+|----------------------------|------------------------------------------------------------|
 | AddedToCamera              | Triggers when the modifier is added to the camera manager. |
 | ModifyCameraBlended        | Modify the transform and FOV of a camera.                  |
 | ProcessViewRotationBlended | Modify the delta rotation of a camera.                     |
 
 Generally speaking, rotation modifiers should be handled in *ProcessViewRotationBlended* as it will modify the true control rotation, rather than just set the rotation of the camera (which would be overridden next frame by the control rotation). This doesn’t apply if your camera isn’t using the control rotation, though most camera setups will.
 
+
+# Setting up a Player Camera Manager
+To use camera stacks and instanced camera modifiers, your Player Camera Manager must inherit from the Camera Dynamics Player Camera Manager (`CDPlayerCameraManager`). Reparenting your Player Camera Manager, or creating and implmenting a child of `CDPlayerCameraManager` will give you access to the required functions for adding/removing camera data, listed below.
+
 ## Managing Camera Stacks and Camera Modifiers During Runtime
 By default, there is a property on the player camera manager *DefaultCameraData* that will activate the specified camera data when the camera manger is initialized. This does not need to be used, though, and data can be added manually.
 The Camera Manager and Camera Dynamics Function Library include a number of functions for managing the active modifiers on your camera manager.
 
 | Function Name                  | Function Description                                                                                          |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------|
 | AddCameraData                  | Adds the specified camera data, and all of its modifiers, to the camera manager                               |
-| RemoveCameraData               | Removes any modifiers associated with the specified camera data.                                              |
 | GetActiveCameraData            | Returns an array of all active camera data on the camera manager.                                             |
 | GetActiveCameraModifierOfClass | Returns the first found active modifier of the specified class, optionally checking for matching tags.        |
 | GetAllActiveModifiersOfClass   | Returns an array of all found active modifiers of the specified class, optionally checking for matching tags. |
 | GetCameraDynamicsCameraManager | Gets an associated camera dynamics camera manager belonging to a specified player controller.                 |
+| RemoveCameraData               | Removes any modifiers associated with the specified camera data.                                              |
 
 Getting a reference/pointer to a camera modifier in runtime will allow you to read/write any exposed values on said camera modifier (This *will not* update the data asset, as the object you're modifying is a runtime copy of the instanced object in the data asset. This is by design.).
 
