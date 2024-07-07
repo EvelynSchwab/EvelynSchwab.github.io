@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Evelyn Schwab</title>
+    <subtitle>Evelyn Schwab</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://EvelynSchwab.github.io/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://EvelynSchwab.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-07-04T00:00:00+00:00</updated>
+    <id>https://EvelynSchwab.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Modular Camera Dynamics - Documentation</title>
+        <published>2024-07-04T00:00:00+00:00</published>
+        <updated>2024-07-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Evelyn Schwab
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/"/>
+        <id>https://EvelynSchwab.github.io/documentation/modularcameradynamics/</id>
+        
+        <content type="html" xml:base="https://EvelynSchwab.github.io/documentation/modularcameradynamics/">&lt;h1 id=&quot;quick-start&quot;&gt;Quick Start&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;installing-and-activating-modular-camera-dynamics&quot;&gt;Installing and Activating Modular Camera Dynamics&lt;&#x2F;h2&gt;
+&lt;p&gt;Install Modular Camera Dynamics for your engine version from the Epic Games Launcher vault, or with an alternate Unreal Engine manager.&lt;&#x2F;p&gt;
+&lt;p&gt;While in engine, navigate to Edit ⇾ Plugins and activate Modular Camera Dynamics. (Screenshot)&lt;&#x2F;p&gt;
+&lt;p&gt;To see and access plugin content, ensure that plugin content is visible in your content browser. (Screenshot)&lt;&#x2F;p&gt;
+&lt;p&gt;It is highly recommended that, should you wish to tweak the behaviour of the included camera data examples, you first duplicate the preset to your current project&#x27;s &lt;code&gt;&#x2F;Content&lt;&#x2F;code&gt; directory. This prevents any changes you make from influencing the plugin in all projects for that version, and will ensure that you do not overwrite your work if you update Modular Camera Dynamics.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;setting-up-your-player-camera-manager&quot;&gt;Setting up Your Player Camera Manager&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;creating-your-player-camera-manager&quot;&gt;Creating your Player Camera Manager&lt;&#x2F;h3&gt;
+&lt;p&gt;Modular Camera Dynamics requires a player camera manager that inherits from &lt;code&gt;CDPlayerCameraManager&lt;&#x2F;code&gt; to manager camera behaviours.&lt;&#x2F;p&gt;
+&lt;p&gt;To set up your Player Camera Manager, you will need to create a new Blueprint (or C++) class of type &lt;code&gt;CDPlayerCameramanager&lt;&#x2F;code&gt;. (Screenshot)&lt;&#x2F;p&gt;
+&lt;p&gt;If you already have a Player Camera Manager, you can re-parent it by opening it and navigating to Class Settings → Parent Class.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;implementing-your-player-camera-manager&quot;&gt;Implementing your Player Camera Manager&lt;&#x2F;h3&gt;
+&lt;p&gt;The Unreal Engine Gameplay Framework requires that you specify the intended Player Camera Manager through your Player Controller.&lt;&#x2F;p&gt;
+&lt;p&gt;If you do not already have a player controller, you must set one up. (either add a link, or explain the process)&lt;&#x2F;p&gt;
+&lt;p&gt;In your Player Controller, set the Camera Manager property to your Player Camera Manager.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;adding-camera-data&quot;&gt;Adding Camera Data&lt;&#x2F;h2&gt;
+&lt;p&gt;In Modular Camera Dynamics, camera behaviours are dictated by camera stacks, within a Data Asset &lt;code&gt;CDCameraData&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;MCD includes a number of camera stack example instances, which you can use to test the implementation of your Player Camera Manager. If the player camera manager does not have any camera data specified, it will fall back to the default camera behaviour (such as a spring arm).&lt;&#x2F;p&gt;
+&lt;p&gt;There are two options for adding new Camera Data:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set the &lt;code&gt;DefaultCameraData&lt;&#x2F;code&gt; property within your Player Camera Manager (screenshot).&lt;&#x2F;li&gt;
+&lt;li&gt;Call the &lt;code&gt;AddCameraData()&lt;&#x2F;code&gt; function, specifying the camera data to add. This is also how you will add camera data during gameplay (screenshot)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;using-the-modular-camera-dynamics-editor&quot;&gt;Using the Modular Camera Dynamics Editor&lt;&#x2F;h2&gt;
+&lt;p&gt;(Add to this section once the editor has an engine button)&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;key-terms-and-concepts&quot;&gt;Key Terms and Concepts&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Camera behaviour:&lt;&#x2F;strong&gt; A single action or reaction that a camera can take, broken down to the simplest form it can take as a standalone element. Some examples of this would be:
+&lt;ul&gt;
+&lt;li&gt;The base position of the camera being drawn from the player&#x27;s location&lt;&#x2F;li&gt;
+&lt;li&gt;The camera being offset behind the player (as in a third person camera)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Camera mode: A collection of camera behaviours that come together to form a greater whole. An example would be:
+&lt;ul&gt;
+&lt;li&gt;A third person over-the-shoulder camera, combining these behaviours:
+&lt;ul&gt;
+&lt;li&gt;Camera base rotation tied to the player controller&#x27;s control rotation&lt;&#x2F;li&gt;
+&lt;li&gt;Camera base position tied to player&#x27;s eye position&lt;&#x2F;li&gt;
+&lt;li&gt;Camera offset 70 units in its local Y axis&lt;&#x2F;li&gt;
+&lt;li&gt;Camera offset -700 units from its facing direction&lt;&#x2F;li&gt;
+&lt;li&gt;Trace from to the player&#x27;s head to check for collisions, and offset the camera if an obstruction is found&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Modular camera modifier:&lt;&#x2F;strong&gt; A camera modifier that exhibits a single potential camera behaviour in a way that would be combined with other modular modifiers in a camera stack to create a camera mode.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Camera stack:&lt;&#x2F;strong&gt; A set of camera modifiers grouped together to create a camera mode, or to add a new element to an existing mode. An example of the latter would be:
+&lt;ul&gt;
+&lt;li&gt;An additive enemy lock-on mode:
+&lt;ul&gt;
+&lt;li&gt;Camera rotation overwritten to be facing a point on another actor&lt;&#x2F;li&gt;
+&lt;li&gt;Camera offset 100 units in the global Z&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The order of camera behaviours is important and does not need to be the same as the order they were in the stack, as will be shown below.&lt;&#x2F;p&gt;
+&lt;p&gt;Putting together the above third person and lock-on examples, we might get the following. &lt;em&gt;This example is formatted as &lt;strong&gt;Camera Stack&lt;&#x2F;strong&gt; - Camera Modifier&lt;&#x2F;em&gt;:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Enemy Lock On - Camera rotation overwritten to face a point on the enemy mesh&lt;&#x2F;li&gt;
+&lt;li&gt;Third Person - Camera base position sources from player eye height&lt;&#x2F;li&gt;
+&lt;li&gt;Third Person - Camera offset 70 units on its Y axis&lt;&#x2F;li&gt;
+&lt;li&gt;Third Person - Camera offset -700 units in its X axis\&lt;&#x2F;li&gt;
+&lt;li&gt;Enemy Lock On - Camera position offset 100 units in the global Z&lt;&#x2F;li&gt;
+&lt;li&gt;Third Person - Trace from the player&#x27;s head to the camera and offset the camera&#x27;s position to any obstruction.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;It&#x27;s important to note that the enemy lock on rotation behaviour has to come before the other behaviours, as it will change the rotation of the camera, which is used to calculate positions in later behaviours.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;included-behaviours&quot;&gt;Included Behaviours&lt;&#x2F;h1&gt;
+&lt;p&gt;The following behaviours are included in MCD. Each have a wide variety of exposed parameters for adjusting their behaviours.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;position-base&quot;&gt;Position Base&lt;&#x2F;h4&gt;
+&lt;p&gt;Sources the base position of a camera from one of the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A global position&lt;&#x2F;li&gt;
+&lt;li&gt;A position local to the player&lt;&#x2F;li&gt;
+&lt;li&gt;A position of a socket on the player&lt;&#x2F;li&gt;
+&lt;li&gt;The player&#x27;s eye height&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;position-offset&quot;&gt;Position Offset&lt;&#x2F;h4&gt;
+&lt;p&gt;Offsets the camera in global and&#x2F;or local space by a specified amount.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;position-distance&quot;&gt;Position Distance&lt;&#x2F;h4&gt;
+&lt;p&gt;Offsets the camera in its local X axis by a specific amount.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;position-lag&quot;&gt;Position Lag&lt;&#x2F;h4&gt;
+&lt;p&gt;Smooths and interpolates the position of the camera in varying ways.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;position-velocity-offset&quot;&gt;Position - Velocity Offset&lt;&#x2F;h4&gt;
+&lt;p&gt;Offsets the position of the camera based on the velocity of the player, with variable interpolation parameters.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;position-dynamic-z&quot;&gt;Position - Dynamic Z&lt;&#x2F;h4&gt;
+&lt;p&gt;Adjusts the Z position of the camera based on a variety of factors, including the current distance from the previous position behaviour, if the player is grounded and the distance a player has travelled since leaving the ground.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;rotation-override&quot;&gt;Rotation Override&lt;&#x2F;h4&gt;
+&lt;p&gt;Overrides the rotation of the camera to a specified Euler rotation, or aims the camera at a specific location, actor, component or socket.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;rotation-from-velocity&quot;&gt;Rotation from Velocity&lt;&#x2F;h4&gt;
+&lt;p&gt;Gradually reorients the camera&#x27;s rotation based on the velocity of the player and the time since the camera&#x27;s rotation has been changed externally.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;sweep-basic&quot;&gt;Sweep Basic&lt;&#x2F;h4&gt;
+&lt;p&gt;Traces from a specified position to the camera&#x27;s position, offsetting the camera&#x27;s position to that location as it finds an obstruction.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;fov-adjust&quot;&gt;FOV Adjust&lt;&#x2F;h4&gt;
+&lt;p&gt;Adjusts the field of view by a given operation and magnitude.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;fov-from-pitch&quot;&gt;FOV from Pitch&lt;&#x2F;h4&gt;
+&lt;p&gt;Adjusts the field of view based on the camera&#x27;s pitch.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;classes&quot;&gt;Classes&lt;&#x2F;h1&gt;
+&lt;p&gt;There are three primary classes added by MCD:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Dynamic Player Camera Manager - &lt;code&gt;UCDPlayerCameraManager&lt;&#x2F;code&gt;
+&lt;ul&gt;
+&lt;li&gt;Extends and adds logic to support managing instanced camera modifiers.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Camera Stack - &lt;code&gt;UCDCameraData&lt;&#x2F;code&gt;
+&lt;ul&gt;
+&lt;li&gt;Data asset container for instanced camera modifiers. Used to group together a set of camera modifiers to make a more wholistic &#x27;camera mode&#x27;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Instanced Camera Modifier - `UCDCameraModifier_Instanced
+&lt;ul&gt;
+&lt;li&gt;Implementation of the Modular Camera Modifier concept, designed to be set up in a Camera Stack Data Asset.&lt;&#x2F;li&gt;
+&lt;li&gt;Individual camera behaviours should be implemented in a single Instanced Camera Modifier.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;creating-new-camera-stacks&quot;&gt;Creating New Camera Stacks&lt;&#x2F;h1&gt;
+&lt;p&gt;Start by creating a new data asset of type &lt;code&gt;CDCameraData&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Within this class, you will find an array of Instanced Camera Modifiers, which you can add new modifier instances to. Selecting from the drop-down, you can choose any instanced camera modifier subclasses.&lt;&#x2F;p&gt;
+&lt;p&gt;Because these objects are instanced inline, you can customise their values here without needing to create subclasses for each variation of the camera behaviour. You can also adjust their values during play-in-editor sessions, and those changes will update in real-time (adding new modifiers or repositioning them will not update during PIE).&lt;&#x2F;p&gt;
+&lt;p&gt;The priority of modifiers is dictated by the order the camera data is added, and the order of the modifiers in said camera data.
+If you need to customise the priority of a modifier (for example, a trace&#x2F;sweep modifier that should take place after &lt;em&gt;all&lt;&#x2F;em&gt; other modifiers) then you can check the &lt;code&gt;CustomPriority&lt;&#x2F;code&gt; Boolean and set a priority value.
+Generally speaking, modifiers that will influence the rotation of the camera should be positioned earlier in the array.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;debugging-cameras&quot;&gt;Debugging Cameras&lt;&#x2F;h1&gt;
+&lt;p&gt;Camera modifiers have a function &lt;code&gt;DisplayDebug()&lt;&#x2F;code&gt; that only runs when the console variable &lt;code&gt;ShowDebug Camera&lt;&#x2F;code&gt; is active. The same condition can be leveraged outside this function (and in blueprint) with the function &lt;code&gt;ShouldDrawDebug()&lt;&#x2F;code&gt;.
+The included modifiers have built-in debug visualisers using this function, and any custom modifiers can also leverage this debugger in Blueprint or C++.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;creating-custom-camera-behaviours-in-modular-camera-modifiers&quot;&gt;Creating Custom Camera Behaviours in Modular Camera Modifiers&lt;&#x2F;h3&gt;
+&lt;p&gt;The Modular Camera Modifier parent class can be subclassed in Blueprint or C++. Overriding the below functions will allow you to set up custom location and FOV overrides. The blueprint override versions of these functions are prefixed with &lt;em&gt;Blueprint&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Function Name&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;AddedToCamera&lt;&#x2F;td&gt;&lt;td&gt;Triggers when the modifier is added to the camera manager.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;ModifyCameraBlended&lt;&#x2F;td&gt;&lt;td&gt;Modify the transform and FOV of a camera.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;ProcessViewRotationBlended&lt;&#x2F;td&gt;&lt;td&gt;Modify the delta rotation of a camera.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;Generally speaking, rotation modifiers should be handled in &lt;code&gt;ProcessViewRotationBlended&lt;&#x2F;code&gt; as it will modify the true control rotation, rather than just set the rotation of the camera (which would be overridden next frame by the control rotation). This doesn’t apply if your camera isn’t using the control rotation, though most camera setups will.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;managing-camera-stacks-and-camera-modifiers-during-runtime&quot;&gt;Managing Camera Stacks and Camera Modifiers During Runtime&lt;&#x2F;h3&gt;
+&lt;p&gt;There is a property on the player camera manager &lt;code&gt;DefaultCameraData&lt;&#x2F;code&gt; that will activate the specified camera data when the camera manger is initialised. This does not need to be used, though, and data can be added manually.
+The Camera Manager and Camera Dynamics Function Library include a number of functions for managing the active modifiers on your camera manager.&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Function Name&lt;&#x2F;th&gt;&lt;th&gt;Function Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;AddCameraData&lt;&#x2F;td&gt;&lt;td&gt;Adds the specified camera data, and all of its modifiers, to the camera manager&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;RemoveCameraData&lt;&#x2F;td&gt;&lt;td&gt;Removes any modifiers associated with the specified camera data.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;GetActiveCameraData&lt;&#x2F;td&gt;&lt;td&gt;Returns an array of all active camera data on the camera manager.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;GetActiveCameraModifierOfClass&lt;&#x2F;td&gt;&lt;td&gt;Returns the first found active modifier of the specified class, optionally checking for matching tags.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;GetAllActiveModifiersOfClass&lt;&#x2F;td&gt;&lt;td&gt;Returns an array of all found active modifiers of the specified class, optionally checking for matching tags.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;GetCameraDynamicsCameraManager&lt;&#x2F;td&gt;&lt;td&gt;Gets an associated camera dynamics camera manager belonging to a specified player controller.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;Getting a reference&#x2F;pointer to a camera modifier in runtime will allow you to read&#x2F;write any exposed values on said camera modifier (This &lt;em&gt;will not&lt;&#x2F;em&gt; update the data asset, as the object you&#x27;re modifying is a runtime copy of the instanced object in the data asset. This is by design.).&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;road-map&quot;&gt;Road map&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Disable and enable modifiers without fully removing them&lt;&#x2F;li&gt;
+&lt;li&gt;Set modifier alphas manually without influencing the blend in&#x2F;out time&lt;&#x2F;li&gt;
+&lt;li&gt;Additional camera modifiers:
+&lt;ul&gt;
+&lt;li&gt;Whiskered sweep trace&lt;&#x2F;li&gt;
+&lt;li&gt;Dynamic Y axis (dynamic offset - Horizon Zero Dawn style)&lt;&#x2F;li&gt;
+&lt;li&gt;Auto-framing of target actors &#x2F; actor bounds&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Debugging views for cameras, set up to override the camera to an orthographic view so that the camera’s position can be seen from another perspective. This will be especially useful for more advanced trace&#x2F;sweep modifiers.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;known-issues&quot;&gt;Known Issues&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Changing parameters via the details panel to their default value, or the default value of their data type, often won&#x27;t update in-game until PIE is restart. This does not effect parameters set from code.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Dreamslayer</title>
+        <published>2024-02-01T00:00:00+00:00</published>
+        <updated>2024-02-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Evelyn Schwab
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://EvelynSchwab.github.io/dreamslayer/"/>
+        <id>https://EvelynSchwab.github.io/dreamslayer/</id>
+        
+        <content type="html" xml:base="https://EvelynSchwab.github.io/dreamslayer/">&lt;p&gt;DreamSlayer is the game project from the second year of our innovative game development pedagogy. It was successfully released on Steam in Feb 2024 and has received over 40,000 library additions and over 2000 unique players, as well as great feedback with 92% of reviews being positive.&lt;&#x2F;p&gt;
+&lt;p&gt;I have been fortunate enough to teach and work alongside some incredibly dedicated and talented students this year, and I am overjoyed to share in their successes in this project!&lt;&#x2F;p&gt;
+&lt;p&gt;Applying my learnings from the previous year, I have been able to achieve a significantly higher quality project with greater outcomes for the students. There were two major factors in this, which I plan to further apply and improve to future iterations of this program:&lt;&#x2F;p&gt;
+&lt;p&gt;One of our major focuses is to simulate conditions in which students would work under in the games industry, including the rarity of beginning a project fully from scratch; rather, utilizing an existing codebase as a springboard for the new project. For Orkus: Scion of the Wyrm, we utilized a project framework sourced from the Unreal Marketplace. The quality of the framework was acceptable, but the unfamiliarity of it for our staff, and lack of documentation, resulted in a lot of poorly developed solutions and a rats&#x27; nest of code by the end of the year.
+To prevent this issue, I took it upon myself to develop a framework over the first few months of the semester, utilizing the Gameplay Ability System (GAS) within Unreal. Utilizing GAS as our foundation was a huge benefit, as it allowed students to utilize official and community documentation when they were developing new additions, instead of wandering half-blind. Developing the solution in-house also allowed us to develop our own documentation, utilizing the GitHub Wiki section to make it easy for students to access.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Unreal Engine Chaos Flesh Test Project - Meat Cube Re-creation</title>
+        <published>2023-11-15T00:00:00+00:00</published>
+        <updated>2023-11-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Evelyn Schwab
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://EvelynSchwab.github.io/meatcube/"/>
+        <id>https://EvelynSchwab.github.io/meatcube/</id>
+        
+        <content type="html" xml:base="https://EvelynSchwab.github.io/meatcube/">&lt;p&gt;A short R&amp;amp;D project to investigate the new experimental Chaos Flesh plugin for Unreal Engine 5.3.&lt;&#x2F;p&gt;
+&lt;p&gt;The primary goal of this project was to re-create the infamous Meat Cube from the 2008 GDC demo of Unreal Engine 3 (see link below). The secondary goal was to evaluate the capabilities, ease of setup and runtime performance of the Chaos Flesh plugin.&lt;&#x2F;p&gt;
+&lt;p&gt;The results were positive, and the tetrahedral simulation does function in a real-time context. There were, however, quite a few limitations:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The simulations do not interact with other objects in the scene, beyond simple collisions (which need to be registered somewhat manually). This notably includes friction, which is key to making the simulation realistic when the flesh body rests any weight on other colliders. I was able to emulate this with physics dampening somewhat, but it is far from perfect.&lt;&#x2F;li&gt;
+&lt;li&gt;The flesh asset does not support variability in the flesh properties. This means you can not have some sections of the flesh be more tense or gelatinous. I don&#x27;t expect that&#x27;s something super necessary to the intended use cases for this tech, however, it does limit this (very niche!) use case.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;It is worth noting that the Chaos Flesh plugin is still experimental, and Epic plans to continue to improve it until it is production-ready.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

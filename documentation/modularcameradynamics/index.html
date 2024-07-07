@@ -1,0 +1,642 @@
+<!doctype html>
+<html class="not-ready lg:text-base" lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Title -->
+  <title>
+    Modular Camera Dynamics - Documentation - Evelyn Schwab
+  </title>
+
+  <!-- Meta -->
+  <meta name="theme-color" />
+
+  
+  <!-- Author -->
+  
+  <!---->
+  
+  <meta name="description" content="Modular Camera Dynamics (MCD) is an UnrealEngine plugin that reworks and extends the CameraModifier system to allow for more modular approaches to building advanced camera behaviours, with much faster iteration time." />
+  <meta name="author" content="Modular Camera Dynamics - Documentation" />
+  <!-- The Open Graph protocol -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Modular Camera Dynamics - Documentation" />
+  <meta property="og:site_name" content="Evelyn Schwab" />
+  <meta property="og:description" content="Modular Camera Dynamics (MCD) is an UnrealEngine plugin that reworks and extends the CameraModifier system to allow for more modular approaches to building advanced camera behaviours, with much faster iteration time." />
+  <meta property="og:url" content="https:&#x2F;&#x2F;EvelynSchwab.github.io&#x2F;documentation&#x2F;modularcameradynamics&#x2F;" />
+  
+  <!---->
+  
+  <meta property="og:image" content="https://EvelynSchwab.github.io/profile/profile.png" />
+  
+  <!---->
+  
+
+  <!-- CSS & JS -->
+  <link rel="preload stylesheet" as="style" href="https://EvelynSchwab.github.io/main.css" />
+  <style>
+    :root {
+      --bg: #f4f4f5;
+      --bg-dark: #18181b;
+      --header: #e4e4e7;
+      --header-dark: #27272a;
+    }
+  </style>
+
+  
+
+  <!-- Dark Icon -->
+  <link rel="preload" as="image" href="https://EvelynSchwab.github.io/icons/theme.svg" />
+
+  <!-- Math -->
+  
+  <!---->
+
+  <!-- Mermaid -->
+  
+  <!---->
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://EvelynSchwab.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://EvelynSchwab.github.io/apple-touch-icon.png" />
+
+  <!-- Feeds -->
+  
+  <!---->
+  
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Atom"
+    href="https://EvelynSchwab.github.io/atom.xml"
+  />
+  
+  
+  <!---->
+  
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https:&#x2F;&#x2F;EvelynSchwab.github.io&#x2F;documentation&#x2F;modularcameradynamics&#x2F;" />
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header
+  class="header fixed top-0 z-40 mx-auto min-h-[3.5rem] w-full"
+>
+  <div class="mx-auto w-full max-w-4xl p-3 lg:flex lg:justify-between">
+    <div class="flex justify-between">
+      <div class="flex items-center">
+        <a class="text-2xl font-semibold" href="https://EvelynSchwab.github.io">Evelyn Schwab</a>
+        <div
+          class="btn-dark ml-4 h-6 w-6 shrink-0 cursor-pointer text-[0] [background:url(./icons/theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+          role="button"
+          aria-label="Dark"
+        ></div>
+      </div>
+      
+      <div
+        class="btn-menu relative z-50 flex h-8 w-8 shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+        role="button"
+        aria-label="Menu"
+      ></div>
+      
+    </div>
+    <script>
+      // base
+      const htmlClass = document.documentElement.classList;
+      setTimeout(() => {
+        htmlClass.remove("not-ready");
+      }, 10);
+
+      // mobile menu
+      const btnMenu = document.querySelector(".btn-menu");
+      btnMenu?.addEventListener("click", () => {
+        htmlClass.toggle("open");
+      });
+
+      // dark theme
+      const setDark = (isDark) => {
+        if (isDark) {
+          document.body.dispatchEvent(new CustomEvent("set-theme", { detail: "dark" }));
+          htmlClass.add("dark");
+        } else {
+          document.body.dispatchEvent(new CustomEvent("set-theme", { detail: "light" }));
+          htmlClass.remove("dark");
+        }
+        localStorage.setItem("dark", isDark);
+      };
+
+      // init
+      const darkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+      if (htmlClass.contains("dark")) {
+        setDark(true);
+      } else {
+        const darkVal = localStorage.getItem("dark");
+        setDark(darkVal ? darkVal === "true" : darkScheme.matches);
+      }
+
+      // listen system
+      darkScheme.addEventListener("change", (event) => {
+        setDark(event.matches);
+      });
+
+      // manual switch
+      const btnDark = document.querySelector(".btn-dark");
+      btnDark.addEventListener("click", () => {
+        setDark(localStorage.getItem("dark") !== "true");
+      });
+    </script>
+    
+    <nav class="flex w-full items-center lg:w-auto">
+      <ul
+        class="nav-wrapper flex w-full flex-col py-2 lg:w-auto lg:flex-row lg:self-center lg:py-0"
+      >
+        
+        <li>
+          <a
+            class="primary-link block py-2 text-center text-lg font-medium lg:px-3 lg:py-0"
+            href="https://EvelynSchwab.github.io/projects"
+            >Projects</a
+          >
+        </li>
+        
+        <li>
+          <a
+            class="primary-link block py-2 text-center text-lg font-medium lg:px-3 lg:py-0"
+            href="https://EvelynSchwab.github.io/documentation"
+            >Docs</a
+          >
+        </li>
+        
+        <li>
+          <a
+            class="primary-link block py-2 text-center text-lg font-medium lg:px-3 lg:py-0"
+            href="https://EvelynSchwab.github.io/tags"
+            >Tags</a
+          >
+        </li>
+        
+        <li>
+          <a
+            class="primary-link block py-2 text-center text-lg font-medium lg:px-3 lg:py-0"
+            href="https://EvelynSchwab.github.io/about"
+            >About</a
+          >
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl break-words px-4 pb-16 pt-32 dark:prose-invert"
+    >
+      
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Modular Camera Dynamics - Documentation</h1>
+    <div class="text-sm antialiased opacity-60">
+  
+  <time>2024-07-04</time>
+  <span class="mx-1">&middot;</span>
+  <span>10min</span>
+  <!---->
+  
+  <!---->
+  
+  <span class="mx-1">&middot;</span>
+  <span>Evelyn Schwab</span>
+  
+</div>
+
+  </header>
+
+  
+
+  <!-- TOC -->
+  <!---->
+<div class="block-bg mb-12 flex rounded-lg p-2 text-lg">
+  <details>
+    <summary class="cursor-pointer py-1 pl-4">
+      <span>Table of Contents</span>
+    </summary>
+    <div class="px-2">
+      <ul>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#quick-start"
+            >Quick Start</a
+          >
+          
+          <ul>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#installing-and-activating-modular-camera-dynamics"
+                >Installing and Activating Modular Camera Dynamics</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#setting-up-your-player-camera-manager"
+                >Setting up Your Player Camera Manager</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#adding-camera-data"
+                >Adding Camera Data</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#using-the-modular-camera-dynamics-editor"
+                >Using the Modular Camera Dynamics Editor</a
+              >
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#key-terms-and-concepts"
+            >Key Terms and Concepts</a
+          >
+          
+        </li>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#included-behaviours"
+            >Included Behaviours</a
+          >
+          
+          <ul>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#position-base"
+                >Position Base</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#position-offset"
+                >Position Offset</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#position-distance"
+                >Position Distance</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#position-lag"
+                >Position Lag</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#position-velocity-offset"
+                >Position - Velocity Offset</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#position-dynamic-z"
+                >Position - Dynamic Z</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#rotation-override"
+                >Rotation Override</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#rotation-from-velocity"
+                >Rotation from Velocity</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#sweep-basic"
+                >Sweep Basic</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#fov-adjust"
+                >FOV Adjust</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#fov-from-pitch"
+                >FOV from Pitch</a
+              >
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#classes"
+            >Classes</a
+          >
+          
+        </li>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#creating-new-camera-stacks"
+            >Creating New Camera Stacks</a
+          >
+          
+        </li>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#debugging-cameras"
+            >Debugging Cameras</a
+          >
+          
+          <ul>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#creating-custom-camera-behaviours-in-modular-camera-modifiers"
+                >Creating Custom Camera Behaviours in Modular Camera Modifiers</a
+              >
+            </li>
+            
+            <li>
+              <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#managing-camera-stacks-and-camera-modifiers-during-runtime"
+                >Managing Camera Stacks and Camera Modifiers During Runtime</a
+              >
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#road-map"
+            >Road map</a
+          >
+          
+        </li>
+        
+        <li>
+          <a class="no-underline hover:underline" href="https://EvelynSchwab.github.io/documentation/modularcameradynamics/#known-issues"
+            >Known Issues</a
+          >
+          
+        </li>
+        
+      </ul>
+    </div>
+  </details>
+</div>
+
+<!---->
+
+  <!-- Content -->
+  <section><h1 id="quick-start">Quick Start</h1>
+<h2 id="installing-and-activating-modular-camera-dynamics">Installing and Activating Modular Camera Dynamics</h2>
+<p>Install Modular Camera Dynamics for your engine version from the Epic Games Launcher vault, or with an alternate Unreal Engine manager.</p>
+<p>While in engine, navigate to Edit ⇾ Plugins and activate Modular Camera Dynamics. (Screenshot)</p>
+<p>To see and access plugin content, ensure that plugin content is visible in your content browser. (Screenshot)</p>
+<p>It is highly recommended that, should you wish to tweak the behaviour of the included camera data examples, you first duplicate the preset to your current project's <code>/Content</code> directory. This prevents any changes you make from influencing the plugin in all projects for that version, and will ensure that you do not overwrite your work if you update Modular Camera Dynamics.</p>
+<h2 id="setting-up-your-player-camera-manager">Setting up Your Player Camera Manager</h2>
+<h3 id="creating-your-player-camera-manager">Creating your Player Camera Manager</h3>
+<p>Modular Camera Dynamics requires a player camera manager that inherits from <code>CDPlayerCameraManager</code> to manager camera behaviours.</p>
+<p>To set up your Player Camera Manager, you will need to create a new Blueprint (or C++) class of type <code>CDPlayerCameramanager</code>. (Screenshot)</p>
+<p>If you already have a Player Camera Manager, you can re-parent it by opening it and navigating to Class Settings → Parent Class.</p>
+<h3 id="implementing-your-player-camera-manager">Implementing your Player Camera Manager</h3>
+<p>The Unreal Engine Gameplay Framework requires that you specify the intended Player Camera Manager through your Player Controller.</p>
+<p>If you do not already have a player controller, you must set one up. (either add a link, or explain the process)</p>
+<p>In your Player Controller, set the Camera Manager property to your Player Camera Manager.</p>
+<h2 id="adding-camera-data">Adding Camera Data</h2>
+<p>In Modular Camera Dynamics, camera behaviours are dictated by camera stacks, within a Data Asset <code>CDCameraData</code>.</p>
+<p>MCD includes a number of camera stack example instances, which you can use to test the implementation of your Player Camera Manager. If the player camera manager does not have any camera data specified, it will fall back to the default camera behaviour (such as a spring arm).</p>
+<p>There are two options for adding new Camera Data:</p>
+<ol>
+<li>Set the <code>DefaultCameraData</code> property within your Player Camera Manager (screenshot).</li>
+<li>Call the <code>AddCameraData()</code> function, specifying the camera data to add. This is also how you will add camera data during gameplay (screenshot)</li>
+</ol>
+<h2 id="using-the-modular-camera-dynamics-editor">Using the Modular Camera Dynamics Editor</h2>
+<p>(Add to this section once the editor has an engine button)</p>
+<h1 id="key-terms-and-concepts">Key Terms and Concepts</h1>
+<ul>
+<li><strong>Camera behaviour:</strong> A single action or reaction that a camera can take, broken down to the simplest form it can take as a standalone element. Some examples of this would be:
+<ul>
+<li>The base position of the camera being drawn from the player's location</li>
+<li>The camera being offset behind the player (as in a third person camera)</li>
+</ul>
+</li>
+<li>Camera mode: A collection of camera behaviours that come together to form a greater whole. An example would be:
+<ul>
+<li>A third person over-the-shoulder camera, combining these behaviours:
+<ul>
+<li>Camera base rotation tied to the player controller's control rotation</li>
+<li>Camera base position tied to player's eye position</li>
+<li>Camera offset 70 units in its local Y axis</li>
+<li>Camera offset -700 units from its facing direction</li>
+<li>Trace from to the player's head to check for collisions, and offset the camera if an obstruction is found</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Modular camera modifier:</strong> A camera modifier that exhibits a single potential camera behaviour in a way that would be combined with other modular modifiers in a camera stack to create a camera mode.</li>
+<li><strong>Camera stack:</strong> A set of camera modifiers grouped together to create a camera mode, or to add a new element to an existing mode. An example of the latter would be:
+<ul>
+<li>An additive enemy lock-on mode:
+<ul>
+<li>Camera rotation overwritten to be facing a point on another actor</li>
+<li>Camera offset 100 units in the global Z</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The order of camera behaviours is important and does not need to be the same as the order they were in the stack, as will be shown below.</p>
+<p>Putting together the above third person and lock-on examples, we might get the following. <em>This example is formatted as <strong>Camera Stack</strong> - Camera Modifier</em>:</p>
+<ol>
+<li>Enemy Lock On - Camera rotation overwritten to face a point on the enemy mesh</li>
+<li>Third Person - Camera base position sources from player eye height</li>
+<li>Third Person - Camera offset 70 units on its Y axis</li>
+<li>Third Person - Camera offset -700 units in its X axis\</li>
+<li>Enemy Lock On - Camera position offset 100 units in the global Z</li>
+<li>Third Person - Trace from the player's head to the camera and offset the camera's position to any obstruction.</li>
+</ol>
+<p>It's important to note that the enemy lock on rotation behaviour has to come before the other behaviours, as it will change the rotation of the camera, which is used to calculate positions in later behaviours.</p>
+<h1 id="included-behaviours">Included Behaviours</h1>
+<p>The following behaviours are included in MCD. Each have a wide variety of exposed parameters for adjusting their behaviours.</p>
+<h4 id="position-base">Position Base</h4>
+<p>Sources the base position of a camera from one of the following:</p>
+<ul>
+<li>A global position</li>
+<li>A position local to the player</li>
+<li>A position of a socket on the player</li>
+<li>The player's eye height</li>
+</ul>
+<h4 id="position-offset">Position Offset</h4>
+<p>Offsets the camera in global and/or local space by a specified amount.</p>
+<h4 id="position-distance">Position Distance</h4>
+<p>Offsets the camera in its local X axis by a specific amount.</p>
+<h4 id="position-lag">Position Lag</h4>
+<p>Smooths and interpolates the position of the camera in varying ways.</p>
+<h4 id="position-velocity-offset">Position - Velocity Offset</h4>
+<p>Offsets the position of the camera based on the velocity of the player, with variable interpolation parameters.</p>
+<h4 id="position-dynamic-z">Position - Dynamic Z</h4>
+<p>Adjusts the Z position of the camera based on a variety of factors, including the current distance from the previous position behaviour, if the player is grounded and the distance a player has travelled since leaving the ground.</p>
+<h4 id="rotation-override">Rotation Override</h4>
+<p>Overrides the rotation of the camera to a specified Euler rotation, or aims the camera at a specific location, actor, component or socket.</p>
+<h4 id="rotation-from-velocity">Rotation from Velocity</h4>
+<p>Gradually reorients the camera's rotation based on the velocity of the player and the time since the camera's rotation has been changed externally.</p>
+<h4 id="sweep-basic">Sweep Basic</h4>
+<p>Traces from a specified position to the camera's position, offsetting the camera's position to that location as it finds an obstruction.</p>
+<h4 id="fov-adjust">FOV Adjust</h4>
+<p>Adjusts the field of view by a given operation and magnitude.</p>
+<h4 id="fov-from-pitch">FOV from Pitch</h4>
+<p>Adjusts the field of view based on the camera's pitch.</p>
+<h1 id="classes">Classes</h1>
+<p>There are three primary classes added by MCD:</p>
+<ul>
+<li>Dynamic Player Camera Manager - <code>UCDPlayerCameraManager</code>
+<ul>
+<li>Extends and adds logic to support managing instanced camera modifiers.</li>
+</ul>
+</li>
+<li>Camera Stack - <code>UCDCameraData</code>
+<ul>
+<li>Data asset container for instanced camera modifiers. Used to group together a set of camera modifiers to make a more wholistic 'camera mode'</li>
+</ul>
+</li>
+<li>Instanced Camera Modifier - `UCDCameraModifier_Instanced
+<ul>
+<li>Implementation of the Modular Camera Modifier concept, designed to be set up in a Camera Stack Data Asset.</li>
+<li>Individual camera behaviours should be implemented in a single Instanced Camera Modifier.</li>
+</ul>
+</li>
+</ul>
+<h1 id="creating-new-camera-stacks">Creating New Camera Stacks</h1>
+<p>Start by creating a new data asset of type <code>CDCameraData</code>.</p>
+<p>Within this class, you will find an array of Instanced Camera Modifiers, which you can add new modifier instances to. Selecting from the drop-down, you can choose any instanced camera modifier subclasses.</p>
+<p>Because these objects are instanced inline, you can customise their values here without needing to create subclasses for each variation of the camera behaviour. You can also adjust their values during play-in-editor sessions, and those changes will update in real-time (adding new modifiers or repositioning them will not update during PIE).</p>
+<p>The priority of modifiers is dictated by the order the camera data is added, and the order of the modifiers in said camera data.
+If you need to customise the priority of a modifier (for example, a trace/sweep modifier that should take place after <em>all</em> other modifiers) then you can check the <code>CustomPriority</code> Boolean and set a priority value.
+Generally speaking, modifiers that will influence the rotation of the camera should be positioned earlier in the array.</p>
+<h1 id="debugging-cameras">Debugging Cameras</h1>
+<p>Camera modifiers have a function <code>DisplayDebug()</code> that only runs when the console variable <code>ShowDebug Camera</code> is active. The same condition can be leveraged outside this function (and in blueprint) with the function <code>ShouldDrawDebug()</code>.
+The included modifiers have built-in debug visualisers using this function, and any custom modifiers can also leverage this debugger in Blueprint or C++.</p>
+<h3 id="creating-custom-camera-behaviours-in-modular-camera-modifiers">Creating Custom Camera Behaviours in Modular Camera Modifiers</h3>
+<p>The Modular Camera Modifier parent class can be subclassed in Blueprint or C++. Overriding the below functions will allow you to set up custom location and FOV overrides. The blueprint override versions of these functions are prefixed with <em>Blueprint</em>.</p>
+<table><thead><tr><th>Function Name</th><th>Description</th></tr></thead><tbody>
+<tr><td>AddedToCamera</td><td>Triggers when the modifier is added to the camera manager.</td></tr>
+<tr><td>ModifyCameraBlended</td><td>Modify the transform and FOV of a camera.</td></tr>
+<tr><td>ProcessViewRotationBlended</td><td>Modify the delta rotation of a camera.</td></tr>
+</tbody></table>
+<p>Generally speaking, rotation modifiers should be handled in <code>ProcessViewRotationBlended</code> as it will modify the true control rotation, rather than just set the rotation of the camera (which would be overridden next frame by the control rotation). This doesn’t apply if your camera isn’t using the control rotation, though most camera setups will.</p>
+<h3 id="managing-camera-stacks-and-camera-modifiers-during-runtime">Managing Camera Stacks and Camera Modifiers During Runtime</h3>
+<p>There is a property on the player camera manager <code>DefaultCameraData</code> that will activate the specified camera data when the camera manger is initialised. This does not need to be used, though, and data can be added manually.
+The Camera Manager and Camera Dynamics Function Library include a number of functions for managing the active modifiers on your camera manager.</p>
+<table><thead><tr><th>Function Name</th><th>Function Description</th></tr></thead><tbody>
+<tr><td>AddCameraData</td><td>Adds the specified camera data, and all of its modifiers, to the camera manager</td></tr>
+<tr><td>RemoveCameraData</td><td>Removes any modifiers associated with the specified camera data.</td></tr>
+<tr><td>GetActiveCameraData</td><td>Returns an array of all active camera data on the camera manager.</td></tr>
+<tr><td>GetActiveCameraModifierOfClass</td><td>Returns the first found active modifier of the specified class, optionally checking for matching tags.</td></tr>
+<tr><td>GetAllActiveModifiersOfClass</td><td>Returns an array of all found active modifiers of the specified class, optionally checking for matching tags.</td></tr>
+<tr><td>GetCameraDynamicsCameraManager</td><td>Gets an associated camera dynamics camera manager belonging to a specified player controller.</td></tr>
+</tbody></table>
+<p>Getting a reference/pointer to a camera modifier in runtime will allow you to read/write any exposed values on said camera modifier (This <em>will not</em> update the data asset, as the object you're modifying is a runtime copy of the instanced object in the data asset. This is by design.).</p>
+<h1 id="road-map">Road map</h1>
+<ul>
+<li>Disable and enable modifiers without fully removing them</li>
+<li>Set modifier alphas manually without influencing the blend in/out time</li>
+<li>Additional camera modifiers:
+<ul>
+<li>Whiskered sweep trace</li>
+<li>Dynamic Y axis (dynamic offset - Horizon Zero Dawn style)</li>
+<li>Auto-framing of target actors / actor bounds</li>
+</ul>
+</li>
+<li>Debugging views for cameras, set up to override the camera to an orthographic view so that the camera’s position can be seen from another perspective. This will be especially useful for more advanced trace/sweep modifiers.</li>
+</ul>
+<h1 id="known-issues">Known Issues</h1>
+<ul>
+<li>Changing parameters via the details panel to their default value, or the default value of their data type, often won't update in-game until PIE is restart. This does not effect parameters set from code.</li>
+</ul>
+</section>
+
+  <hr />
+
+  <!-- Post Taxonomies -->
+  
+<footer class="mt-12 flex flex-col">
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  
+  <div class="mb-2 flex flex-wrap">
+    <span class="block-bg mb-1.5 mr-1.5 rounded-lg px-5 py-1.5">Tags </span>
+    
+    <a
+      class="block-bg block-hover mb-1.5 mr-1.5 rounded-lg px-5 py-1.5 no-underline"
+      href="https://EvelynSchwab.github.io/tags/unreal-engine/"
+      >Unreal Engine</a
+    >
+    
+    <a
+      class="block-bg block-hover mb-1.5 mr-1.5 rounded-lg px-5 py-1.5 no-underline"
+      href="https://EvelynSchwab.github.io/tags/unreal-marketplace/"
+      >Unreal Marketplace</a
+    >
+    
+    <a
+      class="block-bg block-hover mb-1.5 mr-1.5 rounded-lg px-5 py-1.5 no-underline"
+      href="https://EvelynSchwab.github.io/tags/documentation/"
+      >Documentation</a
+    >
+    
+  </div>
+  
+</footer>
+
+<!---->
+
+  <!-- Post Nav -->
+  
+<!---->
+
+  <!-- Comment -->
+  
+</article>
+
+    </main>
+
+    <footer class="mx-auto flex max-w-3xl flex-wrap items-center px-8 py-4 text-sm opacity-60">
+  <div class="mr-auto basis-full lg:basis-1/2">
+    
+    &copy; 2024
+    <a class="link" href="https://EvelynSchwab.github.io"
+      >Evelyn Schwab</a
+    >
+    
+  </div>
+  <div class="flex basis-full lg:basis-1/2 lg:justify-end">
+    <a class="link mr-6 lg:ml-6" href="https://www.getzola.org/" rel="noopener" target="_blank"
+      >Powered by Zola</a
+    >
+    <a class="link" href="https://github.com/st1020/kita" rel="noopener" target="_blank">✎ Kita</a>
+  </div>
+</footer>
+
+  </body>
+</html>
