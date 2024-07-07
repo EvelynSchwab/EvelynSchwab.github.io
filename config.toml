@@ -117,7 +117,7 @@ url = "$BASE_URL/projects"
 
 [[extra.menu]]
 name = "Docs"
-url = "$BASE_URL/tags/documentation"
+url = "$BASE_URL/documentation"
 
 #[[extra.menu]]
 #name = "archive"

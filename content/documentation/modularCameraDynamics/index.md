@@ -6,6 +6,43 @@ description = "Modular Camera Dynamics (MCD) is an UnrealEngine plugin that rewo
 tags = ["Unreal Engine", "Unreal Marketplace", "Documentation"]
 +++
 
+# Quick Start
+## Installing and Activating Modular Camera Dynamics
+Install Modular Camera Dynamics for your engine version from the Epic Games Launcher vault, or with an alternate Unreal Engine manager.
+
+While in engine, navigate to Edit ⇾ Plugins and activate Modular Camera Dynamics. (Screenshot)
+
+To see and access plugin content, ensure that plugin content is visible in your content browser. (Screenshot)
+
+It is highly recommended that, should you wish to tweak the behaviour of the included camera data examples, you first duplicate the preset to your current project's `/Content` directory. This prevents any changes you make from influencing the plugin in all projects for that version, and will ensure that you do not overwrite your work if you update Modular Camera Dynamics.
+
+## Setting up Your Player Camera Manager
+### Creating your Player Camera Manager
+Modular Camera Dynamics requires a player camera manager that inherits from `CDPlayerCameraManager` to manager camera behaviours.
+
+To set up your Player Camera Manager, you will need to create a new Blueprint (or C++) class of type `CDPlayerCameramanager`. (Screenshot)
+
+If you already have a Player Camera Manager, you can re-parent it by opening it and navigating to Class Settings → Parent Class.
+
+### Implementing your Player Camera Manager
+The Unreal Engine Gameplay Framework requires that you specify the intended Player Camera Manager through your Player Controller.
+
+If you do not already have a player controller, you must set one up. (either add a link, or explain the process)
+
+In your Player Controller, set the Camera Manager property to your Player Camera Manager.
+
+## Adding Camera Data
+In Modular Camera Dynamics, camera behaviours are dictated by camera stacks, within a Data Asset `CDCameraData`.
+
+MCD includes a number of camera stack example instances, which you can use to test the implementation of your Player Camera Manager. If the player camera manager does not have any camera data specified, it will fall back to the default camera behaviour (such as a spring arm).
+
+There are two options for adding new Camera Data:
+1. Set the `DefaultCameraData` property within your Player Camera Manager (screenshot).
+2. Call the `AddCameraData()` function, specifying the camera data to add. This is also how you will add camera data during gameplay (screenshot)
+
+## Using the Modular Camera Dynamics Editor
+(Add to this section once the editor has an engine button)
+
 # Key Terms and Concepts
 - **Camera behaviour:** A single action or reaction that a camera can take, broken down to the simplest form it can take as a standalone element. Some examples of this would be:
 	- The base position of the camera being drawn from the player's location
@@ -33,7 +70,7 @@ Putting together the above third person and lock-on examples, we might get the f
 5. Enemy Lock On - Camera position offset 100 units in the global Z
 6. Third Person - Trace from the player's head to the camera and offset the camera's position to any obstruction.
 
-It's important to note that the enemy lock on rotation behaviour has to come before the other behaviours, as it will change the rotation of the camera which is used to calculate positions in later behaviours.
+It's important to note that the enemy lock on rotation behaviour has to come before the other behaviours, as it will change the rotation of the camera, which is used to calculate positions in later behaviours.
 
 # Included Behaviours
 The following behaviours are included in MCD. Each have a wide variety of exposed parameters for adjusting their behaviours.
@@ -58,7 +95,7 @@ Overrides the rotation of the camera to a specified Euler rotation, or aims the 
 #### Rotation from Velocity
 Gradually reorients the camera's rotation based on the velocity of the player and the time since the camera's rotation has been changed externally.
 #### Sweep Basic
-Traces from a specified position to the camera's position, offsetting the camera's position to that location of it finds an obstruction.
+Traces from a specified position to the camera's position, offsetting the camera's position to that location as it finds an obstruction.
 #### FOV Adjust
 Adjusts the field of view by a given operation and magnitude.
 #### FOV from Pitch
@@ -77,7 +114,7 @@ There are three primary classes added by MCD:
 # Creating New Camera Stacks
 Start by creating a new data asset of type `CDCameraData`.
 
-Within this class you will find an array of Instanced Camera Modifiers, which you can add new modifier instances to. Selecting from the drop down, you can choose any instanced camera modifier subclasses. 
+Within this class, you will find an array of Instanced Camera Modifiers, which you can add new modifier instances to. Selecting from the drop-down, you can choose any instanced camera modifier subclasses. 
 
 Because these objects are instanced inline, you can customise their values here without needing to create subclasses for each variation of the camera behaviour. You can also adjust their values during play-in-editor sessions, and those changes will update in real-time (adding new modifiers or repositioning them will not update during PIE).
 
@@ -85,45 +122,37 @@ The priority of modifiers is dictated by the order the camera data is added, and
 If you need to customise the priority of a modifier (for example, a trace/sweep modifier that should take place after *all* other modifiers) then you can check the `CustomPriority` Boolean and set a priority value.
 Generally speaking, modifiers that will influence the rotation of the camera should be positioned earlier in the array.
 
-## Debugging Cameras
-Camera modifiers have a function *DisplayDebug()* that only runs when the console variable *ShowDebug Camera* is active. The same condition can be leveraged outside of this function (and in blueprint) with the function *ShouldDrawDebug()*.
+# Debugging Cameras
+Camera modifiers have a function `DisplayDebug()` that only runs when the console variable `ShowDebug Camera` is active. The same condition can be leveraged outside this function (and in blueprint) with the function `ShouldDrawDebug()`.
 The included modifiers have built-in debug visualisers using this function, and any custom modifiers can also leverage this debugger in Blueprint or C++.
 
-## Creating Custom Camera Behaviours in Modular Camera Modifiers
-The Modular Camera Modifier parent class can be subclassed in Blueprint or C++. Overriding the below functions will allow you to set up custom location and FOV overrides. The blueprint overridable versions of these functions are prefixed with *Blueprint*.
+### Creating Custom Camera Behaviours in Modular Camera Modifiers
+The Modular Camera Modifier parent class can be subclassed in Blueprint or C++. Overriding the below functions will allow you to set up custom location and FOV overrides. The blueprint override versions of these functions are prefixed with *Blueprint*.
 
 | Function Name              | Description                                                |
-|----------------------------|------------------------------------------------------------|
+| -------------------------- | ---------------------------------------------------------- |
 | AddedToCamera              | Triggers when the modifier is added to the camera manager. |
 | ModifyCameraBlended        | Modify the transform and FOV of a camera.                  |
 | ProcessViewRotationBlended | Modify the delta rotation of a camera.                     |
 
-Generally speaking, rotation modifiers should be handled in *ProcessViewRotationBlended* as it will modify the true control rotation, rather than just set the rotation of the camera (which would be overridden next frame by the control rotation). This doesn’t apply if your camera isn’t using the control rotation, though most camera setups will.
+Generally speaking, rotation modifiers should be handled in `ProcessViewRotationBlended` as it will modify the true control rotation, rather than just set the rotation of the camera (which would be overridden next frame by the control rotation). This doesn’t apply if your camera isn’t using the control rotation, though most camera setups will.
 
-
-# Setting up a Player Camera Manager
-To use camera stacks and instanced camera modifiers, your Player Camera Manager must inherit from the Camera Dynamics Player Camera Manager (`CDPlayerCameraManager`). Reparenting your Player Camera Manager, or creating and implmenting a child of `CDPlayerCameraManager` will give you access to the required functions for adding/removing camera data, listed below.
-
-## Managing Camera Stacks and Camera Modifiers During Runtime
-By default, there is a property on the player camera manager *DefaultCameraData* that will activate the specified camera data when the camera manger is initialized. This does not need to be used, though, and data can be added manually.
+### Managing Camera Stacks and Camera Modifiers During Runtime
+There is a property on the player camera manager `DefaultCameraData` that will activate the specified camera data when the camera manger is initialised. This does not need to be used, though, and data can be added manually.
 The Camera Manager and Camera Dynamics Function Library include a number of functions for managing the active modifiers on your camera manager.
 
 | Function Name                  | Function Description                                                                                          |
-|--------------------------------|---------------------------------------------------------------------------------------------------------------|
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | AddCameraData                  | Adds the specified camera data, and all of its modifiers, to the camera manager                               |
+| RemoveCameraData               | Removes any modifiers associated with the specified camera data.                                              |
 | GetActiveCameraData            | Returns an array of all active camera data on the camera manager.                                             |
 | GetActiveCameraModifierOfClass | Returns the first found active modifier of the specified class, optionally checking for matching tags.        |
 | GetAllActiveModifiersOfClass   | Returns an array of all found active modifiers of the specified class, optionally checking for matching tags. |
 | GetCameraDynamicsCameraManager | Gets an associated camera dynamics camera manager belonging to a specified player controller.                 |
-| RemoveCameraData               | Removes any modifiers associated with the specified camera data.                                              |
 
 Getting a reference/pointer to a camera modifier in runtime will allow you to read/write any exposed values on said camera modifier (This *will not* update the data asset, as the object you're modifying is a runtime copy of the instanced object in the data asset. This is by design.).
 
-## Camera Stack Editor
-An editor utility widget designed for easily editing camera stacks can be found in *ModularCameraDynamicsContent/Utility/EUW_CameraDynamicsEditor*, and can be run by right clicking on the asset and selecting 'run editor utility widget'. This widget provides a simple editor for the selected camera stack (which can be disabled with a checkbox) and automatically enables the debug mode on begin play (if debug is checked). It maintains its state between engine sessions.
-
-#  Roadmap
-- Priorities for camera data
+# Road map
 - Disable and enable modifiers without fully removing them
 - Set modifier alphas manually without influencing the blend in/out time
 - Additional camera modifiers:
